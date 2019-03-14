@@ -1,0 +1,182 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Smart Farm</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Nunito" rel="stylesheet">
+        <style>
+            body{
+                background-image: url("https://wallpapersite.com/images/pages/pic_h/6814.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .top{
+                 background: none;
+            }
+            .modify{
+                padding: 0px;
+            }
+            .card{
+                box-shadow: 5px 5px 100px 5px rgba(0,0,0,1);
+            }
+            .msg-txt{
+                font-size: 2.3rem;
+                font-family: 'Indie Flower', cursive;
+            }
+            .head-txt{
+                font-size: 5rem;
+                font-family: 'Nunito', sans-serif;
+            }
+            .img-card{
+                width: 100%;
+                height: 250px;
+            }
+            .air-box{
+                border-color: beige;
+                border: 0.7px solid #C0C0C0;
+                border-radius: 5px;
+            }
+            
+        </style>
+    </head>
+    <body onload="typeWriter()">
+        <div class="container modify">
+            <div class="row">
+                <div class="col-lg-1 col-md-0 "></div>
+                <div class="col-lg-10 col-md-12">
+                    <div class="jumbotron top">
+                          <h1 class="display-4 head-txt">Smart Farm</h1>
+                          <hr class="my-4">
+                          <p class="msg-txt" id="demo"></p>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-0 "></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 col-md-0"></div>
+                <div class="col-lg-10 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                            <% if (mosiStatus<20){ %>    
+                                <img src="/images/very_dry_soil.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Soil Moisture : <%= (mosiStatus) %></p>
+                                </div>
+                            <% } else if (mosiStatus> 20 && mosiStatus<60){ %>
+                                <img src="/images/dry_soil.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Soil Moisture : <%= (mosiStatus) %></p>
+                                </div>
+                            <% }else { %>
+                                <img src="/images/wet_soil.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Soil Moisture : <%= (mosiStatus) %></p>
+                                </div>
+                            <% } %>    
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                            <% if(data.weather == "rainy" || (data.weather == "sunny" && data.tempC >25)){ %>    
+                                <img src="/images/shed_closed.JPG" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Shed Status : Closed</p>
+                                </div>
+                            <% }else{ %>
+                                <img src="/images/shed_open.JPG" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Shed Status : Opened</p>
+                                </div>
+                            <% } %>
+                            </div> 
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="card" style="width: 18rem;">
+                            <%   if (mosiStatus>50){ %>
+                                <img src="/images/pump_off.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Water Pump : OFF</p>
+                                </div>
+                            <% }else{ %>
+                                <img src="/images/pump_on.jpg" class="card-img-top img-card" alt="...">
+                                <div class="card-body">
+                                    <p class="card-text">Water Pump : ON</p>
+                                </div>
+                            <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-0"></div>
+            </div><br><br>
+            <div class="row">
+                <div class="col-lg-1 col-md-0"></div>
+                <div class="col-lg-10 col-md-12">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">AQI: 54</p>
+                                    </div><hr>
+                                    <div class="card-body">
+                                        <p class="card-text">Quality: Moderate</p>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="card" style="width: 18rem;">
+                                <% if(data.weather == "rainy"){ %>
+                                    <img src="/images/rainy.jpg" class="card-img-top img-card" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Weather: Rainy</p>
+                                    </div>
+                                <% }else{ %>
+                                    <img src="/images/sunny.jpg" class="card-img-top img-card" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Weather: Mostly Sunny</p>
+                                    </div>
+                                <% } %>    
+                                </div> 
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">Temperature: <%= data.tempC %></p>
+                                    </div><hr>
+                                    <div class="card-body">
+                                        <p class="card-text">Humidity: <%= data.humidity %>%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-lg-1 col-md-0"></div>
+            </div><br><br>
+        </div>
+        
+        <!--Script Files-->
+        <script>
+            var i = 0;
+            var txt = 'Innovating for Better Farms...';
+            var speed = 100;
+
+            function typeWriter() {
+              if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+              }
+            }
+            window.onload = typeWriter;
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    
+
+        window.location.reload()
+</html>
